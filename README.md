@@ -3,9 +3,6 @@
 </p>
 <p align="center"><h1 align="center">PLANNERWEB</h1></p>
 <p align="center">
-	<em><code>❯ REPLACE-ME</code></em>
-</p>
-<p align="center">
 	<img src="https://img.shields.io/github/license/adriano-abreu/plannerweb?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
 	<img src="https://img.shields.io/github/last-commit/adriano-abreu/plannerweb?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/adriano-abreu/plannerweb?style=default&color=0080ff" alt="repo-top-language">
@@ -36,18 +33,6 @@
 
 ---
 
-##  Overview
-
-<code>❯ REPLACE-ME</code>
-
----
-
-##  Features
-
-<code>❯ REPLACE-ME</code>
-
----
-
 ##  Project Structure
 
 ```sh
@@ -71,8 +56,6 @@
     └── vite.config.ts
 ```
 
-
-###  Project Index
 <details open>
 	<summary><b><code>PLANNERWEB/</code></b></summary>
 	<details> <!-- __root__ Submodule -->
