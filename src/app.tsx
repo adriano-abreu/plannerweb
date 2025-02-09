@@ -9,11 +9,12 @@ import {
   UserRoundPlus,
   X,
 } from 'lucide-react'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 
 export function App() {
   const [isGuestsInputOpen, setIsGuestsInputOpen] = useState(false)
   const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
+  const [emails, setEmails] = useState<string[]>([])
 
   function toggleGuests() {
     setIsGuestsInputOpen(!isGuestsInputOpen)
@@ -21,6 +22,24 @@ export function App() {
 
   function toggleModal() {
     setIsGuestsModalOpen(!isGuestsModalOpen)
+  }
+
+  function handleAddEmail(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const data = new FormData(e.currentTarget)
+    const email = data.get('email')
+
+    if (!email) {
+      return
+    }
+
+    setEmails([...emails, email.toString()])
+  }
+
+  function handleRemoveEmail(emailToRemove: string) {
+    const listEmailUpdated = emails.filter((email) => emailToRemove !== email)
+
+    setEmails(listEmailUpdated)
   }
 
   const textVariants = {
@@ -52,16 +71,6 @@ export function App() {
     initial: { opacity: 0, x: -20 },
     animate: { opacity: 1, x: 0 },
   }
-
-  const emails = [
-    'jessica.white44@yahoo.com',
-    'erik_leffler3@gmail.com',
-    'rebekah.conn21@gmail.com',
-    'emile.mayer25@yahoo.com',
-    'justus_hessel81@hotmail.com',
-    'hellen_graham@yahoo.com',
-    'kole.schiller27@yahoo.com',
-  ]
 
   return (
     <div className="h-screen flex items-center justify-center bg-pattern bg-no-repeat bg-center">
@@ -201,6 +210,7 @@ export function App() {
                 na viagem.
               </p>
             </div>
+
             <div className="flex flex-wrap gap-2">
               {emails.map((email, i) => {
                 return (
@@ -209,7 +219,11 @@ export function App() {
                     className="py-1.5 px-2.5 rounded-md bg-zinc-800 flex items-center gap-2"
                   >
                     <span className="text-zinc-300">{email}</span>
-                    <motion.button type="button" whileTap={{ y: 1 }}>
+                    <motion.button
+                      type="button"
+                      whileTap={{ y: 1 }}
+                      onClick={() => handleRemoveEmail(email)}
+                    >
                       <X className="size-4 text-zinc-400" />
                     </motion.button>
                   </div>
@@ -219,17 +233,22 @@ export function App() {
 
             <div className="bg-zinc-800 w-full h-px" />
 
-            <form className="bg-zinc-950 border border-zinc-800 p-2.5 flex items-center gap-2 rounded-lg">
-              <div className="px-2">
+            <form
+              onSubmit={handleAddEmail}
+              className="bg-zinc-950 border border-zinc-800 p-2.5 flex items-center rounded-lg"
+            >
+              <div className="flex items-center gap-2 flex-1">
                 <AtSign className="text-zinc-400 size-5" />
                 <input
-                  type="text"
+                  type="email"
+                  name="email"
                   placeholder="Digite o email do convidado."
                   className="flex-1 bg-transparent placeholder-zinc-400 outline-none"
                 />
               </div>
 
               <motion.button
+                type="submit"
                 className="flex items-center px-5 py-2 gap-2 bg-lime-300 text-lime-950 rounded-xl hover:bg-lime-400"
                 whileTap={{ y: 1 }}
               >
